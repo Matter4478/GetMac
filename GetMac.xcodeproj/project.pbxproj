@@ -15,6 +15,7 @@
 		9CB0CE572677B42B00EED4DE /* GetMac.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9CB0CE552677B42B00EED4DE /* GetMac.xcdatamodeld */; };
 		9CB0CE612677B42B00EED4DE /* GetMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB0CE602677B42B00EED4DE /* GetMacTests.swift */; };
 		9CB0CE6B2677B42B00EED4DE /* GetMacUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB0CE6A2677B42B00EED4DE /* GetMacUITests.swift */; };
+		9CB0CE7A2677B66700EED4DE /* example.py in Sources */ = {isa = PBXBuildFile; fileRef = 9CB0CE792677B66700EED4DE /* example.py */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,8 @@
 		9CB0CE602677B42B00EED4DE /* GetMacTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMacTests.swift; sourceTree = "<group>"; };
 		9CB0CE662677B42B00EED4DE /* GetMacUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GetMacUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CB0CE6A2677B42B00EED4DE /* GetMacUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMacUITests.swift; sourceTree = "<group>"; };
+		9CB0CE792677B66700EED4DE /* example.py */ = {isa = PBXFileReference; explicitFileType = text.apinotes; path = example.py; sourceTree = "<group>"; };
+		9CB0CE7B2677CDC700EED4DE /* GetMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GetMac.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,12 +99,14 @@
 		9CB0CE492677B42A00EED4DE /* GetMac */ = {
 			isa = PBXGroup;
 			children = (
+				9CB0CE7B2677CDC700EED4DE /* GetMac.entitlements */,
 				9CB0CE4A2677B42A00EED4DE /* GetMacApp.swift */,
 				9CB0CE4C2677B42A00EED4DE /* ContentView.swift */,
 				9CB0CE4E2677B42B00EED4DE /* Assets.xcassets */,
 				9CB0CE532677B42B00EED4DE /* Persistence.swift */,
 				9CB0CE552677B42B00EED4DE /* GetMac.xcdatamodeld */,
 				9CB0CE502677B42B00EED4DE /* Preview Content */,
+				9CB0CE792677B66700EED4DE /* example.py */,
 			);
 			path = GetMac;
 			sourceTree = "<group>";
@@ -260,6 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CB0CE7A2677B66700EED4DE /* example.py in Sources */,
 				9CB0CE572677B42B00EED4DE /* GetMac.xcdatamodeld in Sources */,
 				9CB0CE542677B42B00EED4DE /* Persistence.swift in Sources */,
 				9CB0CE4D2677B42A00EED4DE /* ContentView.swift in Sources */,
@@ -419,6 +425,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GetMac/GetMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -448,6 +455,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GetMac/GetMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
