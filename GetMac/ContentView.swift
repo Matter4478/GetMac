@@ -42,22 +42,44 @@ struct ContentView: View {
         }
         task.resume()
     }
-
+    
+    func getList()->[Product]{
+        var out: [Product]{
+            var tmp: [Product] = []
+            for product in catalog.Products{
+                if product.value.ExtendedMetaInfo?.ProductType == "macOS"{
+                    tmp.append(product.value)
+                }
+            }
+            return tmp
+        }
+        return out
+    }
 
     var body: some View {
         List {
-            ForEach(catalog.Products.keys.sorted(), id: \.self) { key in
-                if catalog.Products[key]?.ExtendedMetaInfo?.ProductType == "macOS" && catalog.Products[key]?.ExtendedMetaInfo?.InstallAssistantPackageIdentifiers?.OSInstall != nil{
+            ForEach(getList(), id: \.self) { key in
                     HStack{
-                        Text("macOS: \(String(catalog.Products[key]?.ExtendedMetaInfo?.ProductVersion ?? ""))")
-                        Spacer()
-                        Menu{
-                            Button("Download", action:{})
-                            Text(String(describing: catalog.Products[key]!))
-                        } label: {
-                            Image(systemName: "arrow.down.to.line")
-                        }
-                    }
+                        Text("macOS: \(String(key.ExtendedMetaInfo?.ProductVersion ?? ""))")
+                            Menu{
+                                ForEach(key.Distributions.sorted(by: >), id:\.key){ product in
+                                            Text(product.key)
+                                            Text(product.value)
+                                    }
+                            } label:{
+                                Text("Distribution:")
+                            }
+                            Menu{
+                                ForEach(key.Packages.sorted(by: >), id:\.self){ product in
+                                    Text("URL: \(product.url), size: \(product.size)")
+                                    }
+                            } label:{
+                                Text("Type:")
+                            }
+                            Button("Download", action:{
+    //                                download.url = catalog.Products[key]?.Distributions
+                                NSWorkspace.shared.open(URL(string: "GetMac://Download")!)
+                            })
                 }
             }
         }
@@ -104,21 +126,21 @@ func readPLIST(url: URL){
     
 }
 
-struct Catalog: Codable{
+struct Catalog: Codable, Hashable{
     let CatalogVersion: Int
     let ApplePostURL: String
     let IndexDate: Date
     let Products: [String:Product]
 }
 
-struct Product: Codable{
+struct Product: Codable, Hashable{
     let ServerMetadataURL: String?
     let Packages: [Package]
     let PostDate: Date
     let Distributions: [String:String]
     let ExtendedMetaInfo: ExtendedMeta?
 }
-struct Package: Codable{
+struct Package: Codable, Hashable{
     let Size: Int
     let URL: String
     let Digest: String?
@@ -127,21 +149,21 @@ struct Package: Codable{
 //struct Details: Codable{
 //    let InstallAssistantPackageIdentifiers:
 //}
-struct MetaContainer: Codable{
+struct MetaContainer: Codable, Hashable{
     let InstallAssistantPackageIdentifiers: [String:ExtendedMeta]?
 }
-struct ExtendedMeta: Codable{
+struct ExtendedMeta: Codable, Hashable{
     let InstallAssistantPackageIdentifiers: InstallAssistantPackageId?
     let ProductType: String?
     let ProductVersion: String?
     let AutoUpdate: String?
 }
 
-struct InstallAssistantPackageId: Codable{
+struct InstallAssistantPackageId: Codable, Hashable{
     let InstallInfo: String?
     let OSInstall: String?
 }
-struct PackageMetaInfo: Codable{
+struct PackageMetaInfo: Codable, Hashable{
     let InstallInfo: String?
     let OSInstall: String?
     let ProductVersion: String?
