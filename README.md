@@ -12,7 +12,7 @@ Find the MacOS version you're looking for and press download. In your Downloads 
 Inside GetMac a folder with the current date will be created containing the os packages.
 
 
-# Bug
+# Known bugs
 - macOS 11 doesn't show up
 
 # Planned Features
