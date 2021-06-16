@@ -13,7 +13,6 @@ Inside GetMac a folder with the current date will be created containing the os p
 
 
 # Known bugs
-- macOS 11 doesn't show up
 
 # Planned Features
 - Download subset of MacOS (i.e. BaseSystem.dmg)
