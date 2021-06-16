@@ -10,13 +10,14 @@ import SwiftUI
 @main
 struct GetMacApp: App {
     let persistenceController = PersistenceController.shared
+    @Environment(\.openURL) var openURL
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
         WindowGroup("Download"){
-            DownloadView(url: download.url ?? URL(fileURLWithPath: "/"))
+            DownloadView()
         }
         .handlesExternalEvents(matching: Set(arrayLiteral: "*"))
     }
@@ -25,5 +26,5 @@ struct GetMacApp: App {
 let download = Download()
 
 class Download: ObservableObject{
-    @Published var url: URL?
+    @Published var Packages: [String:[Package]] = [:]
 }

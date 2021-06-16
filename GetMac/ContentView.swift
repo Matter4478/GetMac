@@ -25,7 +25,7 @@ struct ContentView: View {
         
     }
     @State var catalog = Catalog(CatalogVersion: 0, ApplePostURL: "", IndexDate: Date(), Products: [:])
-    
+    @State var productDict: [String:Product] = [:]
     func downloadParseSuCatalog(url: URL){
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)){ data, response, error in
             if let data = data {
@@ -43,44 +43,50 @@ struct ContentView: View {
         task.resume()
     }
     
-    func getList()->[Product]{
-        var out: [Product]{
-            var tmp: [Product] = []
+    func getList(){
+        productDict = [:]
             for product in catalog.Products{
-                if product.value.ExtendedMetaInfo?.ProductType == "macOS"{
-                    tmp.append(product.value)
+                if product.value.ExtendedMetaInfo?.InstallAssistantPackageIdentifiers != nil && product.value.ServerMetadataURL != nil{
+                    let task = URLSession(configuration: URLSessionConfiguration.default).dataTask(with: URLRequest(url: URL(string: product.value.ServerMetadataURL!)!)) { data, response, error in
+                        if let data = data {
+                            do {
+                            let meta = try PropertyListDecoder().decode(ServerMetaData.self, from: data)
+                                productDict[meta.CFBundleShortVersionString] = product.value
+                            } catch {
+                                print(error)
+                            }
+                        }
+                    }
+                    task.resume()
                 }
-            }
-            return tmp
         }
-        return out
     }
 
+    @Environment(\.openURL) var openURL
     var body: some View {
         List {
-            ForEach(getList(), id: \.self) { key in
+            ForEach(productDict.keys.sorted(by: >), id: \.self) { key in
                     HStack{
-                        Text("macOS: \(String(key.ExtendedMetaInfo?.ProductVersion ?? ""))")
-                            Menu{
-                                ForEach(key.Distributions.sorted(by: >), id:\.key){ product in
+                        Text("macOS: \(key)")
+                            .contextMenu{
+                                ForEach(productDict[key]!.Distributions.sorted(by: >), id:\.key){ product in
                                             Text(product.key)
                                             Text(product.value)
                                     }
-                            } label:{
-                                Text("Distribution:")
-                            }
-                            Menu{
-                                ForEach(key.Packages.sorted(by: >), id:\.self){ product in
-                                    Text("URL: \(product.url), size: \(product.size)")
+                                ForEach(productDict[key]!.Packages, id:\.self){ product in
+                                    Text("URL: \(product.URL), size: \(product.Size)")
                                     }
-                            } label:{
-                                Text("Type:")
+
                             }
+                        Spacer()
                             Button("Download", action:{
-    //                                download.url = catalog.Products[key]?.Distributions
-                                NSWorkspace.shared.open(URL(string: "GetMac://Download")!)
+                                let uuid = UUID().uuidString
+                                download.Packages[uuid] = productDict[key]!.Packages
+                                let url = URL(string: "GetMac://Download?\(uuid)")
+                                openURL(url!)
                             })
                 }
+                Divider()
             }
         }
         .toolbar {
@@ -96,6 +102,9 @@ struct ContentView: View {
         .onAppear {
             downloadParseSuCatalog(url: URL(string: "https://swscan.apple.com/content/catalogs/others/index-11-10.15-10.14-10.13-10.12-10.11-10.10-10.9-mountainlion-lion-snowleopard-leopard.merged-1.sucatalog")!)
         }
+        .onChange(of: catalog, perform: { _ in
+            getList()
+        })
         .navigationTitle(Text("GetMac"))
         .sheet(isPresented: $sheet, onDismiss: nil) {
             ScrollView{
@@ -126,7 +135,7 @@ func readPLIST(url: URL){
     
 }
 
-struct Catalog: Codable, Hashable{
+struct Catalog: Codable, Hashable, Equatable{
     let CatalogVersion: Int
     let ApplePostURL: String
     let IndexDate: Date
@@ -168,5 +177,9 @@ struct PackageMetaInfo: Codable, Hashable{
     let OSInstall: String?
     let ProductVersion: String?
     let AutoUpdate: String?
+}
+
+struct ServerMetaData: Codable, Hashable{
+    let CFBundleShortVersionString: String
 }
 
