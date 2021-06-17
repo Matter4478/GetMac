@@ -44,7 +44,7 @@ struct ContentView: View {
     }
     
     func getList(){
-        productDict = [:]
+        productDict.removeAll()
             for product in catalog.Products{
                 if product.value.ExtendedMetaInfo?.InstallAssistantPackageIdentifiers != nil && product.value.ServerMetadataURL != nil{
                     let task = URLSession(configuration: URLSessionConfiguration.default).dataTask(with: URLRequest(url: URL(string: product.value.ServerMetadataURL!)!)) { data, response, error in
@@ -52,6 +52,25 @@ struct ContentView: View {
                             do {
                             let meta = try PropertyListDecoder().decode(ServerMetaData.self, from: data)
                                 productDict[meta.CFBundleShortVersionString] = product.value
+                            } catch {
+                                print(error)
+                            }
+                        }
+                    }
+                    task.resume()
+                } else if product.value.ExtendedMetaInfo?.InstallAssistantPackageIdentifiers != nil && product.value.ExtendedMetaInfo?.InstallAssistantPackageIdentifiers?.InstallInfo != nil{
+                    let pack = product.value.Packages.first { pkg in
+                        if URL(string: pkg.URL)?.lastPathComponent == "BuildManifest.plist"{
+                            return true
+                        } else {
+                            return false
+                        }
+                    }
+                    let task = URLSession(configuration: URLSessionConfiguration.default).dataTask(with: URLRequest(url: URL(string: (pack?.URL)!)!)) { data, response, error in
+                        if let data = data {
+                            do {
+                                let meta = try PropertyListDecoder().decode(Digest.self, from: data)
+                                productDict[meta.ProductVersion] = product.value
                             } catch {
                                 print(error)
                             }
@@ -70,19 +89,29 @@ struct ContentView: View {
                         Text("macOS: \(key)")
                             .contextMenu{
                                 ForEach(productDict[key]!.Distributions.sorted(by: >), id:\.key){ product in
-                                            Text(product.key)
+                                    Button("\(product.key)", action:{
+                                        let uuid = UUID().uuidString
+                                        download.Packages[uuid] = [Package(Size: 0, URL: product.value, Digest: nil, MetadataURL: nil)]
+                                        let url = URL(string: "GetMac://Download?\(uuid)")
+                                        openURL(url!)
+                                    })
                                             Text(product.value)
                                     }
                                 ForEach(productDict[key]!.Packages, id:\.self){ product in
-                                    Text("URL: \(product.URL), size: \(product.Size)")
+                                    Button("\(product.URL)", action:{
+                                        let uuid = UUID().uuidString
+                                        download.Packages[uuid] = [product]
+                                        let url = URL(string: "GetMac://Download?\(uuid)")
+                                        openURL(url!)
+                                    })
+//                                    Text("URL: \(product.URL), size: \(product.Size)")
                                     }
-
                             }
                         Spacer()
                             Button("Download", action:{
                                 let uuid = UUID().uuidString
                                 download.Packages[uuid] = productDict[key]!.Packages
-                                let url = URL(string: "GetMac://Download?\(uuid)")
+                                let url = URL(string: "GetMac://Download/?\(uuid)")
                                 openURL(url!)
                             })
                 }
@@ -90,9 +119,21 @@ struct ContentView: View {
             }
         }
         .toolbar {
-            Button(action: {sheet.toggle()}) {
-                Label("Add Item", systemImage: "plus")
-            }
+//            Button(action: {sheet.toggle()}) {
+//                Label("Add Item", systemImage: "plus")
+//            }
+            Button("GitHub", action: {
+                _ = NSWorkspace.shared.open(URL(string: "https://github.com/Matter4478/GetMac")!)
+            })
+            Button("Dortania Guides", action: {
+                _ = NSWorkspace.shared.open(URL(string: "https://dortania.github.io")!)
+            })
+            Button("Disk Utility", action:{
+                _ = NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Applications/Utilities/Disk Utility.app"))
+            })
+//            Button("Create Install Media", action: {
+//                openURL(URL(string: "GetMac://CreateInstallMedia")!)
+//            })
             Button(action:{
                 downloadParseSuCatalog(url: URL(string: "https://swscan.apple.com/content/catalogs/others/index-11-10.15-10.14-10.13-10.12-10.11-10.10-10.9-mountainlion-lion-snowleopard-leopard.merged-1.sucatalog")!)
             }){
@@ -177,9 +218,13 @@ struct PackageMetaInfo: Codable, Hashable{
     let OSInstall: String?
     let ProductVersion: String?
     let AutoUpdate: String?
+    let SharedSupport: String?
 }
 
 struct ServerMetaData: Codable, Hashable{
     let CFBundleShortVersionString: String
 }
 
+struct Digest: Codable, Hashable{
+    let ProductVersion: String
+}

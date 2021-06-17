@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		66EA2E0D267A89C100E1E09C /* CreateMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA2E0C267A89C100E1E09C /* CreateMediaView.swift */; };
+		66EA2E11267B356800E1E09C /* ShellScriptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA2E10267B356800E1E09C /* ShellScriptView.swift */; };
 		9C68FE182678EC09000A2253 /* DownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C68FE172678EC09000A2253 /* DownloadView.swift */; };
 		9CB0CE4B2677B42A00EED4DE /* GetMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB0CE4A2677B42A00EED4DE /* GetMacApp.swift */; };
 		9CB0CE4D2677B42A00EED4DE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB0CE4C2677B42A00EED4DE /* ContentView.swift */; };
@@ -37,6 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		66EA2E0B267A886300E1E09C /* CreateInstallMedia.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = CreateInstallMedia.sh; sourceTree = "<group>"; };
+		66EA2E0C267A89C100E1E09C /* CreateMediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMediaView.swift; sourceTree = "<group>"; };
+		66EA2E10267B356800E1E09C /* ShellScriptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShellScriptView.swift; sourceTree = "<group>"; };
 		9C68FE172678EC09000A2253 /* DownloadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadView.swift; sourceTree = "<group>"; };
 		9CB0CE472677B42A00EED4DE /* GetMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GetMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CB0CE4A2677B42A00EED4DE /* GetMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMacApp.swift; sourceTree = "<group>"; };
@@ -112,6 +117,9 @@
 				9CB0CE552677B42B00EED4DE /* GetMac.xcdatamodeld */,
 				9CB0CE502677B42B00EED4DE /* Preview Content */,
 				9CB0CE792677B66700EED4DE /* example.py */,
+				66EA2E0B267A886300E1E09C /* CreateInstallMedia.sh */,
+				66EA2E0C267A89C100E1E09C /* CreateMediaView.swift */,
+				66EA2E10267B356800E1E09C /* ShellScriptView.swift */,
 			);
 			path = GetMac;
 			sourceTree = "<group>";
@@ -270,12 +278,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66EA2E11267B356800E1E09C /* ShellScriptView.swift in Sources */,
 				9C68FE182678EC09000A2253 /* DownloadView.swift in Sources */,
 				9CB0CE7A2677B66700EED4DE /* example.py in Sources */,
 				9CB0CE572677B42B00EED4DE /* GetMac.xcdatamodeld in Sources */,
 				9CB0CE542677B42B00EED4DE /* Persistence.swift in Sources */,
 				9CB0CE4D2677B42A00EED4DE /* ContentView.swift in Sources */,
 				9CB0CE4B2677B42A00EED4DE /* GetMacApp.swift in Sources */,
+				66EA2E0D267A89C100E1E09C /* CreateMediaView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

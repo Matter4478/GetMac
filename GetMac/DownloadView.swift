@@ -19,22 +19,24 @@ struct DownloadView: View{
     @State var originalCount: Int = 0
     @State var count: Int = 0
     @Environment(\.presentationMode) var presentationMode
+    
     func downloadSequence(){
         var target = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first!
         target = target.appendingPathComponent("GetMac/", isDirectory: true)
         print(target)
-        if !FileManager.default.fileExists(atPath: target.path){
+//        if !FileManager.default.fileExists(atPath: target.path){
             do {
                 var date = dateLong.string(from: Date())
                 date = date.replacingOccurrences(of: "/", with: "-")
-                target = target.appendingPathComponent("\(date)/", isDirectory: true)
+                let folder = String(uuid.prefix(10))
+                target = target.appendingPathComponent("\(folder)/", isDirectory: true)
                 print(target)
                 try FileManager.default.createDirectory(atPath: target.path, withIntermediateDirectories: true, attributes: [:])
             } catch {
                 print(error)
                 return
             }
-        }
+//        }
         let packages = download.Packages[uuid]!
         count = packages.count
         originalCount = packages.count
@@ -64,11 +66,15 @@ struct DownloadView: View{
         task.resume()
     }
     @State var progress = Progress()
+    @State var showWheel = true
+    @State var showAlert = false
     var body: some View{
         VStack{
             HStack{
                 ProgressView(progress).padding()
-                ProgressView().padding()
+                if showWheel{
+                    ProgressView().padding()
+                }
             }
         }
         .padding()
@@ -76,17 +82,22 @@ struct DownloadView: View{
             uuid = url.query!
             downloadSequence()
         })
-//        .onAppear {
-//            startDownload()
-//        }
+        .alert(isPresented: $showAlert, content: {
+            Alert(title: Text("Finished"), message: Text("The download is completed"), dismissButton: .default(Text("Ok"), action: {
+                var target = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first!
+                target = target.appendingPathComponent("GetMac/", isDirectory: true)
+                let folder = String(uuid.prefix(10))
+                target = target.appendingPathComponent("\(folder)/", isDirectory: true)
+                NSWorkspace.shared.open(target)
+            }))
+        })
         .navigationTitle(Text("GetMac: Downloading..."))
         .onChange(of: count) { newValue in
             progress.completedUnitCount = Int64(originalCount - count)
-            if originalCount + count == 0{
+            if originalCount - count == originalCount{
                 self.presentationMode.wrappedValue.dismiss()
-                var target = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first!
-                target = target.appendingPathComponent("GetMac/", isDirectory: true)
-                NSWorkspace.shared.open(target)
+                showWheel = false
+                showAlert = true
             }
         }
     }
