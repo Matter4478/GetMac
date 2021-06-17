@@ -1,6 +1,7 @@
 # GetMac
 Get MacOS Installer Packages from a GUI
 
+
 # Compatability
 MacOS 11.0+
 
@@ -15,7 +16,10 @@ Inside GetMac a folder with the current date will be created containing the os p
 # Known bugs
 
 # Planned Features
-- Download subset of MacOS (i.e. BaseSystem.dmg)
-- Mount EFI
-- OpenCore .kext repo
+- Mount EFI (Anyone that can teach me how to elegantly call a root privelege Process in swift?)
+- OpenCore .kext repo (When I've some more spare time)
+
+# Credits:
+- Apple for hosting the catalog
+- https://github.com/munki/macadmin-scripts for the installinstallmacos.py script that I used as inspiration
 
