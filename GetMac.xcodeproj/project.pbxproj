@@ -18,7 +18,6 @@
 		9CB0CE572677B42B00EED4DE /* GetMac.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9CB0CE552677B42B00EED4DE /* GetMac.xcdatamodeld */; };
 		9CB0CE612677B42B00EED4DE /* GetMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB0CE602677B42B00EED4DE /* GetMacTests.swift */; };
 		9CB0CE6B2677B42B00EED4DE /* GetMacUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB0CE6A2677B42B00EED4DE /* GetMacUITests.swift */; };
-		9CB0CE7A2677B66700EED4DE /* example.py in Sources */ = {isa = PBXBuildFile; fileRef = 9CB0CE792677B66700EED4DE /* example.py */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +53,6 @@
 		9CB0CE602677B42B00EED4DE /* GetMacTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMacTests.swift; sourceTree = "<group>"; };
 		9CB0CE662677B42B00EED4DE /* GetMacUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GetMacUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CB0CE6A2677B42B00EED4DE /* GetMacUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMacUITests.swift; sourceTree = "<group>"; };
-		9CB0CE792677B66700EED4DE /* example.py */ = {isa = PBXFileReference; explicitFileType = text.apinotes; path = example.py; sourceTree = "<group>"; };
 		9CB0CE7B2677CDC700EED4DE /* GetMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GetMac.entitlements; sourceTree = "<group>"; };
 		9CFE5B9A267921A9007B60D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -116,7 +114,6 @@
 				9CB0CE532677B42B00EED4DE /* Persistence.swift */,
 				9CB0CE552677B42B00EED4DE /* GetMac.xcdatamodeld */,
 				9CB0CE502677B42B00EED4DE /* Preview Content */,
-				9CB0CE792677B66700EED4DE /* example.py */,
 				66EA2E0B267A886300E1E09C /* CreateInstallMedia.sh */,
 				66EA2E0C267A89C100E1E09C /* CreateMediaView.swift */,
 				66EA2E10267B356800E1E09C /* ShellScriptView.swift */,
@@ -280,7 +277,6 @@
 			files = (
 				66EA2E11267B356800E1E09C /* ShellScriptView.swift in Sources */,
 				9C68FE182678EC09000A2253 /* DownloadView.swift in Sources */,
-				9CB0CE7A2677B66700EED4DE /* example.py in Sources */,
 				9CB0CE572677B42B00EED4DE /* GetMac.xcdatamodeld in Sources */,
 				9CB0CE542677B42B00EED4DE /* Persistence.swift in Sources */,
 				9CB0CE4D2677B42A00EED4DE /* ContentView.swift in Sources */,
@@ -441,6 +437,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = GetMac/GetMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -475,6 +472,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = GetMac/GetMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
