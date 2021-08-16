@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		662683DA26823B4000B6AD11 /* CreateMediaBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 662683D926823B3F00B6AD11 /* CreateMediaBoard.storyboard */; };
+		668C032B2685DD4D00C88AD3 /* CreateMediaScript.app in Resources */ = {isa = PBXBuildFile; fileRef = 668C032A2685DD4D00C88AD3 /* CreateMediaScript.app */; };
 		66EA2E0D267A89C100E1E09C /* CreateMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA2E0C267A89C100E1E09C /* CreateMediaView.swift */; };
 		66EA2E11267B356800E1E09C /* ShellScriptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA2E10267B356800E1E09C /* ShellScriptView.swift */; };
 		9C68FE182678EC09000A2253 /* DownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C68FE172678EC09000A2253 /* DownloadView.swift */; };
@@ -38,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		662683D926823B3F00B6AD11 /* CreateMediaBoard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateMediaBoard.storyboard; sourceTree = "<group>"; };
+		668C032A2685DD4D00C88AD3 /* CreateMediaScript.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = CreateMediaScript.app; sourceTree = "<group>"; };
 		66EA2E0B267A886300E1E09C /* CreateInstallMedia.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = CreateInstallMedia.sh; sourceTree = "<group>"; };
 		66EA2E0C267A89C100E1E09C /* CreateMediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMediaView.swift; sourceTree = "<group>"; };
 		66EA2E10267B356800E1E09C /* ShellScriptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShellScriptView.swift; sourceTree = "<group>"; };
@@ -105,6 +109,7 @@
 		9CB0CE492677B42A00EED4DE /* GetMac */ = {
 			isa = PBXGroup;
 			children = (
+				668C032A2685DD4D00C88AD3 /* CreateMediaScript.app */,
 				9CFE5B9A267921A9007B60D1 /* Info.plist */,
 				9C68FE172678EC09000A2253 /* DownloadView.swift */,
 				9CB0CE7B2677CDC700EED4DE /* GetMac.entitlements */,
@@ -117,6 +122,7 @@
 				66EA2E0B267A886300E1E09C /* CreateInstallMedia.sh */,
 				66EA2E0C267A89C100E1E09C /* CreateMediaView.swift */,
 				66EA2E10267B356800E1E09C /* ShellScriptView.swift */,
+				662683D926823B3F00B6AD11 /* CreateMediaBoard.storyboard */,
 			);
 			path = GetMac;
 			sourceTree = "<group>";
@@ -250,7 +256,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CB0CE522677B42B00EED4DE /* Preview Assets.xcassets in Resources */,
+				668C032B2685DD4D00C88AD3 /* CreateMediaScript.app in Resources */,
 				9CB0CE4F2677B42B00EED4DE /* Assets.xcassets in Resources */,
+				662683DA26823B4000B6AD11 /* CreateMediaBoard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

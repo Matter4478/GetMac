@@ -36,9 +36,9 @@ struct GetMacApp: App {
                 .frame(width: 400, height: 100, alignment: .center)
         }
         .handlesExternalEvents(matching: ["Download"])
-//        WindowGroup("CreateInstall"){
-//            CreateMediaView()
-//        }.handlesExternalEvents(matching: ["CreateInstallMedia"])
+        WindowGroup("CreateInstall"){
+            CreateMediaView()
+        }.handlesExternalEvents(matching: ["CreateInstallMedia"])
     }
 }
 

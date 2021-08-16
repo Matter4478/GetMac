@@ -131,9 +131,9 @@ struct ContentView: View {
             Button("Disk Utility", action:{
                 _ = NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Applications/Utilities/Disk Utility.app"))
             })
-//            Button("Create Install Media", action: {
-//                openURL(URL(string: "GetMac://CreateInstallMedia")!)
-//            })
+            Button("Create Install Media", action: {
+                openURL(URL(string: "GetMac://CreateInstallMedia")!)
+            })
             Button(action:{
                 downloadParseSuCatalog(url: URL(string: "https://swscan.apple.com/content/catalogs/others/index-11-10.15-10.14-10.13-10.12-10.11-10.10-10.9-mountainlion-lion-snowleopard-leopard.merged-1.sucatalog")!)
             }){
