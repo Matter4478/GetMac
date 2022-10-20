@@ -2,7 +2,7 @@
 Get MacOS Installer Packages from a GUI
 
 
-# Compatability
+# Compatibility
 MacOS 11.0+
 
 # Installation
